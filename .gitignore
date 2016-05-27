@@ -1,3 +1,6 @@
 *.o
 bin/wlan
 log/*.txt
+*.swp
+*.swo
+*~
