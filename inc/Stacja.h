@@ -16,8 +16,7 @@ extern Monitor* Dane;
 extern Medium* kanal;
 extern const double test_kanalu;
 
-class Stacja: public Process
-{
+class Stacja: public Process {
 	std::queue <Pakiet *> bufor;	// bufor nadawczy przechowujacy pakiety
 	unsigned int KL, RT;	// licznik retransmisji, kolizji
 	int licznik;			// licznik D

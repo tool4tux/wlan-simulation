@@ -6,8 +6,7 @@
 extern const double MI;
 extern const int D;
 
-class Generator
-{
+class Generator {
 	int modulnik;
 	int mnoznik;
 	int mnoznik2;

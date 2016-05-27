@@ -1,7 +1,6 @@
 #include "Monitor.h"
 
-Monitor :: Monitor(int ilosc_stacji, double czas, bool wr) 
-{ 
+Monitor :: Monitor(int ilosc_stacji, double czas, bool wr) { 
 	write = wr;
 	liczba_stacji = ilosc_stacji;
 	delta = 10000;
@@ -11,37 +10,31 @@ Monitor :: Monitor(int ilosc_stacji, double czas, bool wr)
 	Generator gen = Generator(int(time(NULL)));
 	kanal = new Medium();
 	Stacja* st;
-	for(int i = 0; i < liczba_stacji; i++)
-	{
+	for(int i = 0; i < liczba_stacji; i++) {
 		st = new Stacja(gen.hash());
 		stacje.push(st);
 		st->activate(0);
 	}
 	st = NULL;
-	if(write)
-	{
+	if(write) {
 		delay = fopen("delay.txt","w");
 	}
 }
 
-void Monitor :: execute()
-{
+void Monitor :: execute() {
 	reset();
 	opoznienia.clear();
 }
 
-void Monitor :: opoznienie(double czas)
-{
-	if(write)
-	{
+void Monitor :: opoznienie(double czas) {
+	if(write) {
 		fprintf(delay, "%.6f %.6f\n", zegar, czas);
 	}
 	opoznienia.push_back(czas);
 	dostarczone++;
 }
 
-void Monitor :: reset()
-{
+void Monitor :: reset() {
 	opoznienia.clear();
 	dostarczone = 0;
 	oferowane = 0;
@@ -50,44 +43,36 @@ void Monitor :: reset()
 	kolizje = 0;
 }
 
-void Monitor :: zwieksz_kolizje()
-{
+void Monitor :: zwieksz_kolizje() {
 	kolizje++;
 }
 
-void Monitor :: zwieksz_oferowane()
-{
+void Monitor :: zwieksz_oferowane() {
 	oferowane++;
 }
 
-void Monitor :: zwieksz_retransmisje()
-{
+void Monitor :: zwieksz_retransmisje() {
 	retransmisje++;
 }
 
-void Monitor :: zwieksz_tracone()
-{
+void Monitor :: zwieksz_tracone() {
 	tracone++;
 }
 
-Monitor :: ~Monitor()
-{
+Monitor :: ~Monitor() {
 	double suma = 0;
-	for(unsigned int i = 0; i < opoznienia.size(); i++)
-	{
+	for(unsigned int i = 0; i < opoznienia.size(); i++) {
 		suma += opoznienia[i];
 	}
 	double srednia = suma/dostarczone;
 
 	suma = 0;
-	for(unsigned int i = 0; i < opoznienia.size(); i++)
-	{
+	for(unsigned int i = 0; i < opoznienia.size(); i++) {
 		suma += pow((srednia - opoznienia[i]),2);
 	}
 	double wariancja = suma/dostarczone;
 
-	if(dostarczone == 0)
-	{
+	if(dostarczone == 0) {
 		srednia = 0;
 		wariancja = 0;
 	}
@@ -106,8 +91,7 @@ Monitor :: ~Monitor()
 	printf("   kolizje  :  %.4f \n", (double)kolizje/(czas_symulacji-delta));
 	printf("retransmisje:  %.4f \n", (double)retransmisje/(czas_symulacji-delta));
 
-	if(write)
-	{	
+	if(write) {	
 		FILE* fpredkosc = fopen("predkosc.txt","a");
 		FILE* fsrednia = fopen("srednia.txt","a");
 		FILE* fwariancja = fopen("wariancja.txt","a");
@@ -148,8 +132,7 @@ Monitor :: ~Monitor()
 	}
     //delete kanal;
     Stacja* st;
-    while(!stacje.empty())
-    {
+    while(!stacje.empty()) {
         st = stacje.front();
         stacje.pop();
         delete(st);

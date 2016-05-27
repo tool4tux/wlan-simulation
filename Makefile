@@ -5,10 +5,11 @@ INC=inc
 SRC=src
 APP=wlan
 LOG=log
-OBJECTS=$(BIN)/wlan.o $(BIN)/Generator.o $(BIN)/Simula.o $(BIN)/Monitor.o $(BIN)/Medium.o $(BIN)/Stacja.o $(BIN)/Pakiet.o
+OBJECTS=$(BIN)/wlan.o $(BIN)/Generator.o $(BIN)/Simula.o $(BIN)/Monitor.o \
+	$(BIN)/Medium.o $(BIN)/Stacja.o $(BIN)/Pakiet.o 
 
 CXX=g++
-CFLAGS=-Wall -O3
+CFLAGS=-Wall -O3 -g
 
 all: $(BIN)/$(APP)
 

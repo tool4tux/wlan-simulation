@@ -10,8 +10,7 @@ class Pakiet;
 
 extern const double czas_transmisji;
 
-class Medium: public Process
-{
+class Medium: public Process {
 	std::queue <Stacja *> kolejka;
 	std::queue <Pakiet *> transmitowane;
 	bool kolizja, zajety;

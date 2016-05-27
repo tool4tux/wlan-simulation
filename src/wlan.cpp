@@ -16,12 +16,11 @@ const double MI = 15;
 const double test_kanalu = 0.001;
 
 double zegar = 0.0;		// [ms]
-std::priority_queue <Event> agenda;
+ItemList<Event> agenda;
 Monitor* Dane;
 Medium* kanal;
 
-int main(int argc, char *argv[])
-{	
+int main(int argc, char *argv[]) {	
 	double simulation_time = atof(*++argv);
 	int stacje = atoi(*++argv);
 	bool write = (bool)atoi(*++argv);
@@ -29,29 +28,25 @@ int main(int argc, char *argv[])
 	Process* current = Dane;
 	time_t start = time(NULL);
 
-	while(simulation_time > zegar)
-	{
-		zegar = agenda.top().event_time;
-		current = agenda.top().proc;
+	while(simulation_time > zegar) {
+		zegar = agenda.top()->event_time;
+		current = agenda.top()->proc;
 		agenda.pop();
 		current->execute();
-		if(current->terminated)
-		{
+		if(current->terminated) {
 			delete current;
 		}
 	}
-	
+
 	delete Dane;
 	printf("\nczas symulacji: %i [s]\n", (int)(time(NULL) - start));
 
-    while(false)
-    {
-        current = agenda.top().proc;
-        agenda.pop();
-        delete(current);
-    }
-    if(write == 0) 
-	{
+	while(false) {
+		current = agenda.top()->proc;
+		agenda.pop();
+		delete(current);
+	}
+	if(write == 0) {
 		getchar();
 	}
 	return 0;

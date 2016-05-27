@@ -8,8 +8,7 @@
 #include "Simula.h"
 #include "Stacja.h"
 
-class Monitor: public Process
-{
+class Monitor: public Process {
 	double time_test, czas_symulacji, delta;
 	int liczba_stacji, dostarczone, tracone, oferowane;
 	int retransmisje, kolizje;

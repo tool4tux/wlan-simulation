@@ -6,8 +6,7 @@ class Stacja;
 
 extern const double Pz;
 
-class Pakiet: public Process
-{
+class Pakiet: public Process {
 	Stacja* nadajnik;
 	double czas_nadania;
 public:

@@ -1,7 +1,6 @@
 #include "Generator.h"
 
-Generator :: Generator(long long int ziarno_poczatkowe)
-{
+Generator :: Generator(long long int ziarno_poczatkowe) {
 	ziarno = ziarno_poczatkowe;
 	mnoznik = 16807;
 	modulnik = 2147483647;
@@ -9,31 +8,26 @@ Generator :: Generator(long long int ziarno_poczatkowe)
 	mnoznik2 = 630360016;
 }
 
-Generator :: Generator()
-{
+Generator :: Generator() {
 	Generator(1);
 }
 
-long long int Generator :: hash()
-{
+long long int Generator :: hash() {
 	ziarno = (mnoznik2 * ziarno) % modulnik;
 	return ziarno;
 }
 
-double Generator :: losuj()
-{
+double Generator :: losuj() {
 	ziarno = (mnoznik * ziarno) % modulnik;
 	return double(ziarno) / modulnik;
 }
 
-int Generator :: losuj_przedzial()
-{
+int Generator :: losuj_przedzial() {
 	ziarno = (mnoznik * ziarno) % modulnik;
 	return ziarno % D + 1;
 }
 
-double Generator :: losuj_wykladniczy()
-{
+double Generator :: losuj_wykladniczy() {
 	return -mi * log(losuj());
 }
 

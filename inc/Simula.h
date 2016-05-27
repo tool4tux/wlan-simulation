@@ -1,17 +1,15 @@
 #ifndef SIMULA_H
 #define SIMULA_H
 
-#include <queue>
-#include <deque>
+#include "ItemList.h"
 
 class Process;
 class Event;
 
 extern double zegar;
-extern std::priority_queue <Event> agenda;
+extern ItemList<Event> agenda;
 
-class Process
-{
+class Process {
 	Event* my_event;
 public:
 	int phase;
@@ -22,13 +20,13 @@ public:
 	~Process();
 };
 
-class Event
-{
+class Event {
 public:
 	double event_time;
 	Process* proc;
 	Event(Process* ptr): event_time(-1.0), proc(ptr) {}
 	bool operator < (const Event &other) const;
+	bool operator <= (const Event &other) const;
 };
 
 #endif
